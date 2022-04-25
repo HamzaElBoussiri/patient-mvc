@@ -1,5 +1,6 @@
 package ma.emsi.patientmvc.sec;
 
+import ma.emsi.patientmvc.sec.services.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource  dataSource;
+    @Autowired
+    private UserDetailServiceImpl userDetailService;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -32,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("user2").password(encPassword).roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password(encPassword).roles("USER", "ADMIN");
         */
+
         /*
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -39,20 +43,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username as principal, role as role from users_role where username=?")
                 .rolePrefix("ROLE_")
                 .passwordEncoder(passwordEncoder);
-         */
+*/
+         auth.userDetailsService(userDetailService);
 
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        });
+
+
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/delete/**","/edit/**","/formPatients/**","/save/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/delete/**","/edit/**","/formPatients/**","/save/**").hasAuthority("ADMIN");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/403");
