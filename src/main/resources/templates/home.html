@@ -6,12 +6,65 @@
       layout:decorate="template1"
 >
 <head>
-    <meta charset="UTF-8">
-    <title>Index</title>
+    <style>
+         body{
+             background-color: aqua ;
+             background-image: url(https://img.freepik.com/vecteurs-libre/composition-uniforme-medecin-vue-rapprochee-realiste-robe-blanche-du-medecin-illustration-stethoscope-cravate_1284-61908.jpg?w=2000);
+             background-repeat: no-repeat ;
+             background-size:cover ;
+         }
+         h1{
+             color: deeppink; font-family: Arial;font-style: italic ;
+             margin-top: 10px;
+             font-size: 65px;
 
+         }
+         h5{
+             margin-left: 23px;
+             margin-bottom: 25px;
+             border: aliceblue;
+             font-size: 30px;
+         }
+
+         .inner {
+             display: inline-block;
+             height:150px;
+             margin:10px;
+             width: 20%;
+         }
+    </style>
+
+    <meta charset="UTF-8">
+    <title>Home Page</title>
 </head>
-<body>
+<body >
 <div layout:fragment="content1">
+    <div >
+        <div  >
+            <h1 th:align=center   >welcome to your medical office !</h1>
+        </div>
+        <div class="inner">
+            <h5>About Us</h5>
+            <h6>Caring for a patient takes more than a medical degree: it takes a team! In this course, you will build your knowledge of medical terminology, medical office processes, the technology that keeps an office humming. You’ll also explore different office roles all while building the beginnings of a portfolio. Let’s march through the waiting room and throw open the doors to a career as a Medical Office Admin today!</h6>
+        </div>
+        <div class="inner" >
+            <h5> Contact Us</h5>
+            <h6>HCO contact information
+                Phone numbers:
+                Medi-Cal Managed Care: +2126 44 21 20 30
+                Coordinated Care Initiative: +212 5 44 21 20 04
+                Express Lane / CalFresh: +2125 44 21 20 03
+                Mailing address:
+                cabinet123@gmail.com
+                CA Department of Health Care Services
+                Health Care Options
+                P.O. Box 989009
+                Casablanca ,les Orangers
+                CA 95798-9850</h6>
+        </div>
+    </div>
+
 </div>
 </body>
+
 </html>
